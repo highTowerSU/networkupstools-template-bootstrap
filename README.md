@@ -8,6 +8,12 @@ Put assets folder and header html to
 
 put both upsstats*.html to /etc/nut
 
+git clone https://github.com/highTowerSU/networkupstools-template-bootstrap.git
+cd networkupstools-template-bootstrap
+cp header.html /usr/share/nut/www
+cp upsstats* /etc/nut/
+cp -R assets /usr/share/nut/www/
+
 Add alias to the apache configuration in /etc/apache2/conf.d:
 
 Alias /nut /usr/share/nut/www
