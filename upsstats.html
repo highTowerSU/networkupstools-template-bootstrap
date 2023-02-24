@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Network UPS Tools upsstats : UPS Status</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/Raleway.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Network UPS Tools upsstats@VERSION@</h1>
+        <h4 style="margin-bottom: 32px;">@DATE %a %b %d %X %Z %Y@</h4>
+        <div class="table-responsive">
+            <table class="table table-striped table-striped-columns table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>System</th>
+                        <th>Model</th>
+                        <th>Status</th>
+                        <th>Battery</th>
+                        <th>Input (VAC)</th>
+                        <th>Output (VAC)</th>
+                        <th>Load (%)</th>
+                        <th>UPS<br>Temp</th>
+                        <th>Battery<br>Runtime</th>
+                        <th>Data<br>Tree</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr></tr>
+                    <tr>
+                        <td class="t1">@HOSTLINK@</td>
+                        <td class="t1">@VAR ups.model@</td>
+                        <td>@STATUS@</td>
+                        <td class="t2">@IFSUPP battery.charge@@VAR battery.charge@%@ENDIF@</td>
+                        <td class="t2">@ELSE@@IFSUPP input.L2-N.voltage@@IFBETWEEN input.transfer.low input.transfer.high input.L1-N.voltage@@IFBETWEEN input.transfer.low input.transfer.high input.L2-N.voltage@@IFBETWEEN input.transfer.low input.transfer.high input.L3-N.voltage@</td>
+                        <td class="t2">@ELSE@@IFBETWEEN input.transfer.low input.transfer.high input.voltage@</td>
+                        <td class="t2">@ELSE@</td>
+                        <td style="background: red;">@ENDIF@@IFSUPP input.L2-L3.voltage@@VAR input.L1-L2.voltage@@VAR input.L2-L3.voltage@@VAR input.L3-L1.voltage@@ELSE@@IFSUPP input.L2-N.voltage@@VAR input.L1-N.voltage@@VAR input.L2-N.voltage@@VAR input.L3-N.voltage@@ELSE@@IFSUPP input.voltage@@VAR input.voltage@@ENDIF@</td>
+                        <td class="t2">@IFSUPP output.L2-L3.voltage@@VAR output.L1-L2.voltage@@VAR output.L2-L3.voltage@@VAR output.L3-L1.voltage@@ELSE@@IFSUPP output.L2-N.voltage@@VAR output.L1-N.voltage@@VAR output.L2-N.voltage@@VAR output.L3-N.voltage@@ELSE@@IFSUPP output.voltage@@VAR output.voltage@@ENDIF@</td>
+                        <td class="t2">@IFSUPP output.L2.power.percent@@VAR output.L1.power.percent@@VAR output.L2.power.percent@@VAR output.L3.power.percent@@ELSE@@IFSUPP output.L2.realpower.percent@@VAR output.L1.realpower.percent@@VAR output.L2.realpower.percent@@VAR output.L3.realpower.percent@@ELSE@@IFSUPP ups.load@@VAR ups.load@%@ENDIF@</td>
+                        <td class="t2">@IFSUPP ups.temperature@@UPSTEMP@@DEGREES@@ELSE@@IFSUPP battery.temperature@@BATTTEMP@@DEGREES@@ENDIF@</td>
+                        <td class="t2">@IFSUPP battery.runtime@@RUNTIME@@ENDIF@</td>
+                        <td class="t2">@TREELINK@</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/startup-modern.js"></script>
+</body>
+
+</html>
